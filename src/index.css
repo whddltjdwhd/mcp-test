@@ -57,6 +57,10 @@ h3 {
   border-radius: 8px;
   padding: 1.5rem;
   background-color: rgba(100, 108, 255, 0.05);
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  min-width: 450px;
 }
 
 .section.after {
