@@ -1,5 +1,5 @@
 import UserProfileBefore from "./before/UserProfile";
-import UserProfileAfter from "./after/UserProfile";
+// import UserProfileAfter from "./after/UserProfile";
 
 function App() {
   return (
@@ -35,7 +35,11 @@ function App() {
           <h3>
             After <span className="badge v19">React 19</span>
           </h3>
-          <UserProfileAfter userId={1} />
+          {
+            /* {<UserProfileAfter userId={1} />} */ <p>
+              이곳에 UserProfileAfter 컴포넌트를 추가하세요.
+            </p>
+          }
           <div
             className="info-box"
             style={{ marginTop: "1rem", fontSize: "0.9em" }}
