@@ -1,14 +1,14 @@
-# React 18 → React 19 마이그레이션 핸즈온 세션
+# 코딩 에이전트를 똑똑하게 사용하기 with MCP 서버
 
 ## 🎯 세션 목표
 
-Gemini CLI와 Context7 MCP를 활용하여 React 18 코드를 React 19의 최신 기능으로 마이그레이션하는 실전 경험
+MCP(Model Context Protocol)를 활용하여 **문서 학습 → 계획 수립 → 테스트 작성 → 코드 리팩터링 → 검증 → PR 생성**에 이르는 전체 워크플로를 자동화합니다.
 
-## 📚 학습 내용
+## 📚 사용할 MCP 서버
 
-1. **React 19 Actions**: 복잡한 폼 로직을 선언적으로 간소화
-2. **React 19 use Hook**: 데이터 페칭의 새로운 패러다임
-3. **Context7**: 최신 기술 문서에 실시간으로 연결된 AI 파트너
+1. **Context7**: 최신 라이브러리 문서를 실시간으로 학습
+2. **GitHub**: 이슈/PR 생성 및 관리 자동화
+3. **PlayWright**: E2E 테스트 자동 생성 및 실행
 
 ## 🚀 시작하기
 
@@ -16,88 +16,147 @@ Gemini CLI와 Context7 MCP를 활용하여 React 18 코드를 React 19의 최신
 
 ```bash
 npm install
-# 또는
-yarn install
 ```
 
 ### 2. 개발 서버 실행
 
 ```bash
 npm run dev
-# 또는
-yarn dev
 ```
 
-### 3. Gemini CLI 설정 확인
+### 3. MCP 서버 연결 확인
 
-```bash
-# Context7이 정상 작동하는지 테스트
-gemini -c context7 "Test"
-```
+VS Code에서 GitHub Copilot이 Context7, GitHub, PlayWright MCP 서버와 연결되었는지 확인하세요.
 
 ## 📁 프로젝트 구조
 
 ```
-hands-on-react18/
+client/
 ├── src/
-│   ├── before/              # React 18 버전 (마이그레이션 전)
-│   │   ├── ProfileForm.jsx  # 시나리오 1: 복잡한 폼 로직
-│   │   └── UserProfile.jsx  # 시나리오 2: useEffect 데이터 페칭
-│   ├── after/               # React 19 버전 (마이그레이션 후)
-│   │   ├── ProfileForm.jsx  # Actions + useActionState
-│   │   └── UserProfile.jsx  # use Hook + Suspense
-│   ├── broken/              # 트러블슈팅용 잘못된 예제
-│   │   └── ProfileForm_broken.jsx
-│   ├── App.jsx             # 메인 앱
+│   ├── before/              # 리팩터링 전 코드
+│   │   ├── ProfileForm.jsx  # 실습 대상 파일
+│   │   └── UserProfile.jsx
+│   ├── after/               # 리팩터링 후 참고 코드
+│   ├── App.jsx
 │   └── main.jsx
-└── README.md
+└── tests/                   # PlayWright 테스트 파일 저장 위치
 ```
 
-## 🎓 시나리오 1: 폼(Form) 로직 마이그레이션
+## 🍀 기초 실습: Context7로 문서 학습하기
 
-### Before (React 18)
+### 목표
 
-- ❌ 3개의 useState (name, isPending, error)
-- ❌ 수동 event.preventDefault()
-- ❌ 명령형 상태 관리 (setIsPending, setError)
-- ❌ 수동 UI 비활성화 (disabled={isPending})
+Context7 MCP를 사용하여 최신 라이브러리 문서를 학습하고 코드에 반영합니다.
 
-### After (React 19)
+### 프롬프트
 
-- ✅ useActionState로 통합 상태 관리
-- ✅ <form action={formAction}> 네이티브 지원
-- ✅ useFormStatus로 자동 pending 상태
-- ✅ 선언적 폼 처리
-
-### Context7 프롬프트
-
-```bash
-gemini -c context7 "이 React 18 폼 코드(파일:./src/before/ProfileForm.jsx)를 React 19의 'Actions' 기능을 사용하도록 마이그레이션해줘. 'useActionState'와 'useFormStatus' 훅을 활용해서 로딩, 에러 처리를 포함한 코드를 더 간결하게 만들고 싶어. 마이그레이션된 전체 코드를 제공해줘."
+```
+c7을 이용해서 google/genai 라이브러리를 학습하고
+텍스트 생성을 생성형 AI를 사용하도록 변경해줘
 ```
 
-## 🎓 시나리오 2: 데이터 페칭 마이그레이션
+### 결과
 
-### Before (React 18)
+- Context7이 google/genai 최신 문서를 가져옴
+- Gemini가 문서 기반으로 코드를 업데이트
 
-- ❌ useEffect + 3개의 useState (data, loading, error)
-- ❌ 경쟁 상태(race condition) 수동 방지
-- ❌ 복잡한 클린업 로직
-- ❌ 수동 로딩/에러 UI 처리
+---
 
-### After (React 19)
+## 🧨 심화 실습: MCP 통합 워크플로
 
-- ✅ use(promise)로 렌더링 단계 데이터 읽기
-- ✅ Suspense로 선언적 로딩 처리
-- ✅ ErrorBoundary로 선언적 에러 처리
-- ✅ 자동 경쟁 상태 방지
+### Phase 1: React 19 문서 학습
 
-### Context7 프롬프트
+**프롬프트:**
 
-```bash
-gemini -c context7 "이 React 18 데이터 페칭 코드(파일:./src/before/UserProfile.jsx)를 React 19의 'use' 훅과 '<Suspense>'를 사용하도록 마이그레이션해줘. 'useEffect'와 3개의 'useState'를 모두 제거하고 싶어. 부모 컴포넌트가 <Suspense>를 어떻게 사용해야 하는지도 함께 보여줘."
+```
+c7을 이용해서 React 19 문서를 학습하고
+useActionState 전문가가 되어줘.
 ```
 
-## 🐛 트러블슈팅: useFormStatus의 함정
+**결과:** Gemini가 React 19 useActionState API 전문 지식을 습득합니다.
+
+---
+
+### Phase 2: 계획 수립 및 이슈 생성
+
+**프롬프트:**
+
+```
+현재 작업 중인 내용을 useActionState로 리팩터링할 계획을 세우고
+GitHub MCP를 이용하여 새로운 이슈로 만들어 줘.
+```
+
+**결과:**
+
+- Gemini가 현재 파일 분석 후 리팩터링 계획 수립
+- GitHub MCP가 자동으로 이슈 생성
+
+---
+
+### Phase 3: 테스트 작성
+
+**프롬프트:**
+
+```
+이 폼의 동작을 검증할 PlayWright 테스트 코드를 만들어서
+'tests/MyForm.spec.js' 파일로 저장해 줘.
+PlayWright MCP를 사용해서 어떻게 검증할 지 계획을 수립해
+```
+
+**결과:**
+
+- PlayWright MCP가 테스트 계획 수립
+- tests/MyForm.spec.js 파일 자동 생성
+
+---
+
+### Phase 4: 코드 리팩터링
+
+**프롬프트:**
+
+```
+아까 만든 GitHub 이슈 계획대로,
+현재 소스코드 파일을 리팩터링해줘.
+```
+
+**결과:** Gemini가 계획에 따라 코드를 리팩터링합니다.
+
+---
+
+### Phase 5: 리팩터링 검증
+
+**프롬프트:**
+
+```
+PlayWright 테스트를 실행해서
+리팩터링이 잘 됐는지 확인해 줘.
+```
+
+**결과:** PlayWright 테스트 실행 및 결과 확인
+
+---
+
+### Phase 6: PR 생성
+
+**프롬프트:**
+
+```
+변경 사항을 커밋하고,
+아까 만든 이슈와 연결해서 PR까지 올려 줘.
+```
+
+**결과:**
+
+- GitHub MCP가 커밋 메시지 자동 생성
+- 이슈와 연결된 PR 자동 생성
+
+---
+
+## 💡 핵심 포인트
+
+- **Context7**: 최신 문서를 실시간으로 학습하여 AI에게 정확한 컨텍스트 제공
+- **GitHub MCP**: 이슈/PR 관리 자동화로 워크플로 간소화
+- **PlayWright MCP**: 자동 테스트 생성으로 리팩터링 안정성 확보
 
 ### 문제 상황
 
