@@ -80,7 +80,15 @@ yarn start
 
 ### 4. MCP 서버 연결 확인
 
-Gemini CLI에서 Context7, GitHub, PlayWright MCP 서버와 연결되었는지 확인하세요.
+Gemini CLI를 실행하고 `/mcp` 명령어를 입력하여 MCP 서버 연결 상태를 확인하세요.
+
+다음 3개의 MCP 서버가 모두 표시되면 설정이 완료된 것입니다:
+
+- **context7** - 최신 라이브러리 문서 학습
+- **github** - GitHub 이슈/PR 관리
+- **playwright** - E2E 테스트 자동화
+
+![MCP 서버 연결 확인](./public/mcp.png)
 
 ## 📁 프로젝트 구조
 
@@ -262,10 +270,28 @@ gemini -c context7 "방금 릴리스된 React 19.2 (2025년 10월)의 새로운 
 
 ## 💡 핵심 메시지
 
-### "지식의 격차(Information Gap)"
+### MCP로 해결하는 "지식의 격차(Information Gap)"
 
-- 기존 AI: 학습 데이터 시점에 멈춤
-- Context7: 최신 문서에 실시간 연결
+#### 문제점: 기존 AI의 한계
 
-context7을 gemini-cli에 연결하는 법: https://github.com/upstash/context7
-Gihub MCP를 gemini-cli에 연결하는 법: https://github.com/github/github-mcp-server/blob/main/docs/installation-guides/install-gemini-cli.md
+- **고정된 지식**: 학습 데이터의 특정 시점에 갇혀 있음
+- **최신 정보 부족**: 새로운 라이브러리 버전, API 변경사항을 모름
+- **수동 업데이트**: 개발자가 직접 최신 문서를 찾아 제공해야 함
+
+#### 해결책: MCP를 통한 실시간 컨텍스트 연결
+
+- **Context7**: 최신 라이브러리 문서를 실시간으로 학습
+- **GitHub**: 코드 변경 이력과 이슈를 자동으로 추적
+- **PlayWright**: 테스트 자동화로 리팩토링 안정성 보장
+
+#### 결과: 진정한 AI 페어 프로그래밍
+
+MCP는 단순한 도구가 아닌, **AI에게 실시간 지식을 제공하는 파이프라인**입니다.  
+이를 통해 AI는 최신 베스트 프랙티스를 적용하고, 신뢰할 수 있는 코드를 생성할 수 있습니다.
+
+---
+
+### 참고
+
+- context7을 gemini-cli에 연결하는 법: https://github.com/upstash/context7
+- Gihub MCP를 gemini-cli에 연결하는 법: https://github.com/github/github-mcp-server/blob/main/docs/installation-guides/install-gemini-cli.md
