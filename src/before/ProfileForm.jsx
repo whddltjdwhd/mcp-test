@@ -25,7 +25,7 @@ export default function ProfileForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} data-testid="profile-form">
       <h4>프로필 업데이트</h4>
       <input
         type="text"
@@ -33,13 +33,28 @@ export default function ProfileForm() {
         onChange={(e) => setName(e.target.value)}
         placeholder="이름 입력"
         disabled={isPending} // 7. 수동으로 UI 비활성화
+        data-testid="profile-name-input"
+        aria-label="이름 입력"
       />
-      <button type="submit" disabled={isPending}>
+      <button
+        type="submit"
+        disabled={isPending}
+        data-testid="profile-submit-button"
+        aria-busy={isPending}
+      >
         {isPending ? "저장 중..." : "저장"}
       </button>
-      {error && <p className="error">{error}</p>}
+      {error && (
+        <p className="error" data-testid="profile-error-message" role="alert">
+          {error}
+        </p>
+      )}
       {submittedName && (
-        <p className="success">
+        <p
+          className="success"
+          data-testid="profile-success-message"
+          role="status"
+        >
           ✓ {submittedName}님의 프로필이 업데이트되었습니다!
         </p>
       )}
