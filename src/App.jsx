@@ -33,7 +33,8 @@ function App() {
         </p>
       </div>
       <TextGeneratorBefore />
-      <hr /> ㅇ<h2>🧨 심화 실습: React 19 마이그레이션 워크플로</h2>
+      <hr />
+      <h2>🧨 심화 실습: React 19 마이그레이션 워크플로</h2>
       <div className="info-box">
         <p>
           <strong>Phase 1:</strong> React 19 문서 학습 →{" "}
