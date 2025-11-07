@@ -2,7 +2,7 @@
 
 ## 🎯 세션 목표
 
-MCP(Model Context Protocol)를 활용하여 **문서 학습 → 계획 수립 → 테스트 작성 → 코드 리팩터링 → 검증 → PR 생성**에 이르는 전체 워크플로를 자동화합니다.
+MCP(Model Context Protocol)를 활용하여 **문서 학습 → 계획 수립 → 테스트 작성 → 코드 리팩토링 → 검증 → PR 생성**에 이르는 전체 워크플로를 자동화합니다.
 
 ## 📚 사용할 MCP 서버
 
@@ -12,19 +12,73 @@ MCP(Model Context Protocol)를 활용하여 **문서 학습 → 계획 수립 �
 
 ## 🚀 시작하기
 
-### 1. 의존성 설치
+### 1. MCP 서버 설정
+
+#### 1.1 기본 설정 확인
+
+프로젝트의 `/.gemini` 폴더에 기본적인 Gemini CLI MCP 명세가 이미 구성되어 있습니다.
+
+#### 1.2 MCP 서버 설치
+
+터미널에서 다음 명령어를 실행하여 필요한 MCP 서버를 설치합니다:
+
+```bash
+# GitHub MCP 서버 설치
+gemini extensions install https://github.com/github/github-mcp-server
+
+# Context7 MCP 서버 설치
+gemini extensions install https://github.com/upstash/context7
+```
+
+> **참고:** PlayWright MCP는 이미 `settings.json`에 명세되어 있습니다.
+
+#### 1.3 환경 변수 설정
+
+`/.gemini` 폴더 안에 `.env` 파일을 생성하고 필요한 API 키를 추가합니다:
+
+##### Context7 API 키 발급
+
+1. [Context7 웹사이트](https://context7.com/)에 접속하여 회원가입
+2. 대시보드에서 API 키 발급
+3. `/.gemini/.env` 파일에 다음 내용 추가:
+
+```bash
+CONTEXT7_API_KEY=your_context7_api_key_here
+```
+
+##### GitHub Personal Access Token (PAT) 발급
+
+1. [GitHub PAT 생성 페이지](https://github.com/settings/personal-access-tokens/new)에 접속
+2. 다음 권한 설정:
+   - **Repository Access**: All repositories 선택
+   - **Permissions**: Issues, Pull Requests 선택
+3. 토큰 생성 후 `/.gemini/.env` 파일에 추가:
+
+```bash
+GITHUB_TOKEN=your_github_pat_here
+```
+
+##### 최종 .env 파일 예시
+
+```bash
+# /.gemini/.env
+CONTEXT7_API_KEY=your_context7_api_key_here
+GITHUB_TOKEN=your_github_pat_here
+```
+
+### 2. 의존성 설치
 
 ```bash
 yarn install
 ```
 
-### 2. 개발 서버 실행
+### 3. 개발 서버 실행
 
 ```bash
 yarn start
 ```
 
-### 3. MCP 서버 연결 확인
+### 4. MCP 서버 연결 확인
 
 Gemini CLI에서 Context7, GitHub, PlayWright MCP 서버와 연결되었는지 확인하세요.
 
@@ -33,10 +87,10 @@ Gemini CLI에서 Context7, GitHub, PlayWright MCP 서버와 연결되었는지 �
 ```
 client/
 ├── src/
-│   ├── before/                  # 리팩터링 전 코드 (React 18 패턴)
+│   ├── before/                  # 리팩토링 전 코드 (React 18 패턴)
 │   │   ├── ProfileForm.jsx      # 폼 제출 처리 (useState 4개 사용)
 │   │   └── TextGenerator.jsx    # AI 텍스트 생성 (수동 상태 관리)
-│   ├── after/                   # 리팩터링 후 코드 (React 19 패턴)
+│   ├── after/                   # 리팩토링 후 코드 (React 19 패턴)
 │   │   └── (실습 중 생성됨)
 │   ├── api.js                   # Mock API 함수
 │   ├── ErrorBoundary.jsx        # 에러 처리용 컴포넌트
@@ -72,7 +126,7 @@ c7을 이용해서 google/genai 라이브러리를 학습하고
 
 ## 🧨 심화 실습: MCP 통합 워크플로
 
-현재 `src/before/ProfileForm.jsx`를 React 19의 최신 문법으로 리팩터링하는 전체 워크플로를 진행합니다.
+현재 `src/before/ProfileForm.jsx`를 React 19의 최신 문법으로 리팩토링하는 전체 워크플로를 진행합니다.
 
 ### Phase 1: React 19 문서 학습
 
@@ -91,13 +145,13 @@ c7을 이용해서 React 19 문서를 학습해줘.
 **프롬프트:**
 
 ```
-현재 작업 중인 내용을 최신 react 문법을 이용해 리팩터링할 계획을 세우고
+현재 작업 중인 내용을 최신 react 문법을 이용해 리팩토링할 계획을 세우고
 GitHub MCP를 이용하여 새로운 이슈로 만들어 줘.
 ```
 
 **결과:**
 
-- Copilot이 현재 파일 분석 후 리팩터링 계획 수립
+- Copilot이 현재 파일 분석 후 리팩토링 계획 수립
 - GitHub MCP가 자동으로 이슈 생성 (예: Issue #1)
 
 ---
@@ -111,6 +165,14 @@ GitHub MCP를 이용하여 새로운 이슈로 만들어 줘.
 'tests/ProfileForm.spec.js' 파일로 저장해 줘.
 ```
 
+**테스트 시나리오:**
+
+- ✅ 폼이 정상적으로 렌더링되는지 확인
+- ✅ 이름 입력 필드에 값 입력 가능한지 확인
+- ✅ 저장 버튼 클릭 시 로딩 상태로 변경되는지 확인 (`aria-busy="true"`)
+- ✅ 성공 메시지가 표시되는지 확인 (`data-testid="profile-success-message"`)
+- ✅ 에러 시나리오 테스트 (빈 이름 제출 등)
+
 **결과:**
 
 - PlayWright를 사용한 E2E 테스트 생성
@@ -118,29 +180,45 @@ GitHub MCP를 이용하여 새로운 이슈로 만들어 줘.
 
 ---
 
-### Phase 4: 코드 리팩터링
+### Phase 4: 코드 리팩토링
 
 **프롬프트:**
 
 ```
-ProfileForm만 리팩토링 진행해줘
+ProfileForm을 최신 리액트 문법을 이용하여 리팩토링 진행해줘
+그리고 완성된 파일을 App.jsx에 추가해줘
 ```
+
+**리팩토링 체크리스트:**
+
+- ✅ `useActionState`로 상태 관리 통합
+- ✅ 기존 `data-testid` 속성 유지 (테스트 호환성)
+- ✅ `aria-busy`, `role` 등 접근성 속성 유지
+- ✅ 동일한 UI/UX 동작 보장
 
 **결과:**
 
-- Copilot이 계획에 따라 코드를 리팩터링
+- Copilot이 계획에 따라 코드를 리팩토링
 - `src/after/ProfileForm.jsx` 파일 생성
+- App.jsx에 리팩토링된 파일 추가
 
 ---
 
-### Phase 5: 리팩터링 검증
+### Phase 5: 리팩토링 검증
 
 **프롬프트:**
 
 ```
 PlayWright 테스트를 실행해서
-리팩터링이 잘 됐는지 확인해 줘.
+리팩토링이 잘 됐는지 확인해 줘.
 ```
+
+**검증 포인트:**
+
+- ✅ Before 버전과 동일한 테스트가 After 버전에서도 통과
+- ✅ 모든 `data-testid` 속성이 유지되어 테스트 코드 재사용 가능
+- ✅ 사용자 경험(로딩, 에러, 성공 메시지)이 동일하게 작동
+- ✅ React 19의 새로운 기능 활용으로 코드는 더 간결해짐
 
 **결과:** PlayWright 테스트 실행 및 결과 확인
 
@@ -166,7 +244,7 @@ PlayWright 테스트를 실행해서
 
 - **Context7**: 최신 문서를 실시간으로 학습하여 AI에게 정확한 컨텍스트 제공
 - **GitHub MCP**: 이슈/PR 관리 자동화로 워크플로 간소화
-- **PlayWright MCP**: 자동 테스트 생성으로 리팩터링 안정성 확보
+- **PlayWright MCP**: 자동 테스트 생성으로 리팩토링 안정성 확보
 
 ### Context7 진단 프롬프트
 
@@ -188,3 +266,6 @@ gemini -c context7 "방금 릴리스된 React 19.2 (2025년 10월)의 새로운 
 
 - 기존 AI: 학습 데이터 시점에 멈춤
 - Context7: 최신 문서에 실시간 연결
+
+context7을 gemini-cli에 연결하는 법: https://github.com/upstash/context7
+Gihub MCP를 gemini-cli에 연결하는 법: https://github.com/github/github-mcp-server/blob/main/docs/installation-guides/install-gemini-cli.md
