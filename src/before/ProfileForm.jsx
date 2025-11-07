@@ -6,6 +6,7 @@ export default function ProfileForm() {
   const [name, setName] = useState("");
   const [isPending, setIsPending] = useState(false); // 1. 로딩 상태
   const [error, setError] = useState(null); // 2. 에러 상태
+  const [submittedName, setSubmittedName] = useState(""); // 3. 제출된 이름
 
   const handleSubmit = async (event) => {
     event.preventDefault(); // 3. 수동으로 기본 동작 방지
@@ -14,6 +15,7 @@ export default function ProfileForm() {
 
     try {
       await submitForm(name);
+      setSubmittedName(name); // 제출 성공 시 이름 저장
       setName(""); // 성공 시 초기화
     } catch (err) {
       setError(err.message); // 5. 수동으로 에러 상태 설정
@@ -36,6 +38,11 @@ export default function ProfileForm() {
         {isPending ? "저장 중..." : "저장"}
       </button>
       {error && <p className="error">{error}</p>}
+      {submittedName && (
+        <p className="success">
+          ✓ {submittedName}님의 프로필이 업데이트되었습니다!
+        </p>
+      )}
     </form>
   );
 }
