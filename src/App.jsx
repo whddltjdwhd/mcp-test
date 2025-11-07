@@ -1,6 +1,5 @@
 import TextGeneratorBefore from "./before/TextGenerator";
 import ProfileFormBefore from "./before/ProfileForm";
-import UserProfileBefore from "./before/UserProfile";
 // import TextGeneratorAfter from "./after/TextGenerator";
 // import ProfileFormAfter from "./after/ProfileForm";
 // import UserProfileAfter from "./after/UserProfile";
@@ -86,7 +85,7 @@ function App() {
             style={{ marginTop: "1rem", fontSize: "0.9em" }}
           >
             <p>✅ useActionState로 통합 상태 관리</p>
-            <p>✅ useFormStatus로 자동 pending 상태</p>
+            <p>✅ 자동 pending 상태 관리</p>
             <p>✅ 선언적 폼 처리</p>
           </div>
         </div>
