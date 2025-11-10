@@ -65,7 +65,7 @@ function App() {
           <h3>
             After <span className="badge v19">useActionState</span>
           </h3>
-          <p style={{ color: "#fbbf24", padding: "1rem" }}>
+          <p style={{ color: "#fbbc04", padding: "1rem" }}>
             <strong>📝 실습 순서:</strong>
             <br />
             1. React 19 문서 학습
