@@ -147,7 +147,7 @@ context7을 통해 불러온 '/googleapis/js-genai' 라이브러리 문서를 �
 context7을 이용해서 React 19 문서를 학습해줘.
 ```
 
-**결과:** Copilot이 React 19 최신 지식을 습득합니다.
+**결과:** Gemini CLI가 React 19 최신 지식을 습득합니다.
 
 ---
 
@@ -156,13 +156,13 @@ context7을 이용해서 React 19 문서를 학습해줘.
 **프롬프트:**
 
 ```
-현재 작업 중인 내용을 최신 react 문법을 이용해 ProfileForm.jsx 파일을 리팩토링할 계획을 세우고
+현재 작업 중인 내용을 최신 React 문법을 이용해 ProfileForm.jsx 파일을 리팩토링할 계획을 세우고
 GitHub MCP를 이용하여 현재 레포지토리와 연결된 원격 저장소에 새로운 이슈로 만들어 줘.
 ```
 
 **결과:**
 
-- Copilot이 현재 파일 분석 후 리팩토링 계획 수립
+- Gemini CLI가 현재 파일 분석 후 리팩토링 계획 수립
 - GitHub MCP가 자동으로 이슈 생성 (예: Issue #1)
 
 ---
@@ -178,12 +178,12 @@ ProfileForm을 최신 리액트 문법을 이용하여 계획한 리팩토링 �
 
 **리팩토링 체크리스트:**
 
-- ✅ 최신 react 문법으로 상태 관리 통합
+- ✅ 최신 React 문법으로 상태 관리 통합
 - ✅ 동일한 UI/UX 동작 보장
 
 **결과:**
 
-- Copilot이 계획에 따라 코드를 리팩토링
+- Gemini CLI가 계획에 따라 코드를 리팩토링
 - `src/after/ProfileForm.jsx` 파일 생성
 - App.jsx에 리팩토링된 파일 추가
 
@@ -241,7 +241,7 @@ useFormStatus를 사용했는데 'pending' 상태가 업데이트되지 않는 �
 **프롬프트 예시:**
 
 ```
-context7을 이용해서 react19의 새로운 기능들을 학습하고,
+context7을 이용해서 React19의 새로운 기능들을 학습하고,
 현재 프로젝트에 적용 가능한 기능과 그 이점을 설명해줘.
 ```
 
