@@ -1,9 +1,10 @@
 import ProfileFormBefore from "./before/ProfileForm";
+import ProfileFormAfter from "./after/ProfileForm";
 import TextGenerator from "./before/TextGenerator";
 
 function App() {
   return (
-    <div>
+    <div className="app">
       <h1>🚀 코딩 에이전트를 똑똑하게 사용하기 with MCP 서버</h1>
       <div className="info-box">
         <p>
@@ -61,6 +62,7 @@ function App() {
           <h3>
             After <span className="badge v19">React 19</span>
           </h3>
+          <ProfileFormAfter />
           <div
             className="info-box"
             style={{ marginTop: "1rem", fontSize: "0.9em" }}
